@@ -17,7 +17,6 @@ const Portifolio = () => {
 
   const contatos: Contact[] =[
     { plataforma: "GitHub", link: "https://github.com/fnmiranda" , icon:"github"},
-    { plataforma: "E-mail", link: "mailto:r20franciscomiranda@gmail.com", icon:"email"},
   ]
   // Dados do programador
   const programador = {
