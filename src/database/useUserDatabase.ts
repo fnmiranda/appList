@@ -19,7 +19,7 @@ export function useUserDatabase() {
             const result = await db.getAllAsync<{ id: number, name: string, email: string, password: string }>(
                 'SELECT * FROM users WHERE email = ?', [email]
             );
-            return result[0]; // Retorna o primeiro usuário encontrado
+            return result[0];
         } catch (error) {
             console.error('Erro ao buscar usuário:', error);
             return null;

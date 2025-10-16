@@ -133,7 +133,7 @@
         "pelotao": "1",
         "turma": "A",
         "tipo_sanguineo": "O+",
-        "residencia": "SR",
+        "residencia": "R",
         "nascimento": "29/07/2002",
         "email": "afonseca.felipe@ime.eb.br",
         "funcao": "24019",
@@ -368,7 +368,7 @@
         "nome": "NIGRI",
         "nome_completo": "PAULO VICTOR NIGRI",
         "segmento": "M",
-        "pelotao": "1",
+        "pelotao": "2",
         "turma": "C",
         "tipo_sanguineo": "O+",
         "residencia": "SR",
@@ -385,7 +385,7 @@
         "pelotao": "1",
         "turma": "C",
         "tipo_sanguineo": "O-",
-        "residencia": "R",
+        "residencia": "SR",
         "nascimento": "05/04/2001",
         "email": "alvarez.pedro@ime.eb.br",
         "funcao": "24053",
@@ -438,7 +438,7 @@
         "nome": "DOMINGOS",
         "nome_completo": "THIAGO DOMINGOS FERREIRA DA SILVA",
         "segmento": "M",
-        "pelotao": "2",
+        "pelotao": "1",
         "turma": "C",
         "tipo_sanguineo": "A+",
         "residencia": "SR",
@@ -480,7 +480,7 @@
         "nome": "ATTALA",
         "nome_completo": "VINICIUS ATTALA ALVES LEONARDO",
         "segmento": "M",
-        "pelotao": "1",
+        "pelotao": "2",
         "turma": "C",
         "tipo_sanguineo": "A+",
         "residencia": "R",
@@ -966,7 +966,21 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.401",
+        "numero": "23044",
+        "nome": "DA COSTA",
+        "nome_completo": "LUÍS GUSTAVO DA COSTA DOS SANTOS",
+        "segmento": "M",
+        "pelotao": "2",
+        "turma": "C",
+        "tipo_sanguineo": "O+",
+        "residencia": "R",
+        "nascimento": "01/08/2001",
+        "email": "dacosta@ime.eb.br",
+        "funcao": "",
+        "situacao": "NENHUMA"
+    },
+    {
+        "numero": "24401",
         "nome": "ZANANDREA",
         "nome_completo": "BRENNO PIMENTEL ZANANDREA",
         "segmento": "M",
@@ -980,7 +994,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.402",
+        "numero": "24402",
         "nome": "SERRA",
         "nome_completo": "BRUNO SERRA HERINGER",
         "segmento": "M",
@@ -994,7 +1008,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.403",
+        "numero": "24403",
         "nome": "HARLEY",
         "nome_completo": "CAIO HARLEY CONSTANCIO NEVES",
         "segmento": "M",
@@ -1008,7 +1022,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.404",
+        "numero": "24404",
         "nome": "DAVI BRAGA",
         "nome_completo": "DAVI BRAGA GARCIA AMARAL",
         "segmento": "M",
@@ -1022,7 +1036,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.405",
+        "numero": "24405",
         "nome": "KELLER",
         "nome_completo": "FELIPE KELLER",
         "segmento": "M",
@@ -1036,7 +1050,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.406",
+        "numero": "24406",
         "nome": "GUILHERME",
         "nome_completo": "GUILHERME RODRIGUES DO NASCIMENTO",
         "segmento": "M",
@@ -1050,7 +1064,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.407",
+        "numero": "24407",
         "nome": "LAIS RODRIGUES",
         "nome_completo": "LAIS RODRIGUES DA ROSA",
         "segmento": "F",
@@ -1064,7 +1078,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.408",
+        "numero": "24408",
         "nome": "MARCATO",
         "nome_completo": "MATEUS MARCATO DE ANDRADE",
         "segmento": "M",
@@ -1078,7 +1092,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.409",
+        "numero": "24409",
         "nome": "MATEUS ALVES",
         "nome_completo": "MATEUS VICTOR ALVES",
         "segmento": "M",
@@ -1092,7 +1106,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.410",
+        "numero": "24410",
         "nome": "SCHUBERT",
         "nome_completo": "MATHEUS PIZZATO SCHUBERT",
         "segmento": "M",
@@ -1106,7 +1120,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.411",
+        "numero": "24411",
         "nome": "RENATO F\u00c9LIX",
         "nome_completo": "RENATO COSTA FELIX",
         "segmento": "M",
@@ -1120,7 +1134,7 @@
         "situacao": "NENHUMA"
     },
     {
-        "numero": "24.412",
+        "numero": "24412",
         "nome": "VITOR LETIERI",
         "nome_completo": "VITOR LETIERI LIMA",
         "segmento": "M",

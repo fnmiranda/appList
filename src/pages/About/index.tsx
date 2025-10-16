@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView, Image ,StyleSheet, Linking, TouchableOpacity } from "react-native";
 
 import {Entypo, FontAwesome, Ionicons} from "@expo/vector-icons"
+import CalendarView from "@/src/components/Calendar/CalendarView";
+import TaskList from "@/src/components/Calendar/TaskList";
 
 type EntypoIconName = "google-drive" | "text-document" | "github" | "email" | "keyboard";
 
@@ -12,6 +14,8 @@ export type Contact = {
     icon: EntypoIconName;
     // icon: string;
 };
+
+
 
 const Portifolio = () => {
 
@@ -62,11 +66,15 @@ const Portifolio = () => {
 
   let anyalink = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cbr.com%2Fspy-x-family-season-2-op-surpasses-2-million-views%2F&psig=AOvVaw04ERB3z6aRkahwyhkmr49t&ust=1742752235837000&source=images&cd=vfe&opi=89978449&ved=0CBcQjhxqFwoTCLCkwev3nYwDFQAAAAAdAAAAABAE'
 
+
+
   return (
     <View style={{ marginTop: 10 }}>
       <ScrollView contentContainerStyle={styles.container}>
         {/* Título */}
         <Text style={styles.titulo}>CRÉDITOS</Text>
+
+       
 
         {/* Informações do Programador */}
         <View style={styles.secao}>

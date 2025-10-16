@@ -80,8 +80,8 @@ export async function initializeDatabase(database: SQLiteDatabase) {
   if (resultadoUsers.count === 0) {
     // Se não houver usuários, cadastra um usuário padrão
     const nome = "Admin";
-    const email = "admin@example.com";
-    const senha = "admin123"; // Senha em texto plano (será encriptada)
+    const email = "admin";
+    const senha = "admin"; // Senha em texto plano (será encriptada)
 
     // Encripta a senha
     const hashedPassword = await Crypto.digestStringAsync(

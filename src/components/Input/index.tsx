@@ -17,11 +17,12 @@ type Props = TextInputProps & {
     onIconLeftPress?: () => void;
     onIconRightPress?: () => void;
     height?: number,
-    labelStyle?:StyleProp<TextStyle>
+    labelStyle?:StyleProp<TextStyle>,
+    textAlignVertical?: string
 };
 
 const Input = forwardRef<TextInput, Props>(
-    ({ IconLeft, IconRight, iconLeftName, iconRightName, title, onIconLeftPress, onIconRightPress, height, labelStyle, ...rest }, ref) => {
+    ({ IconLeft, IconRight, iconLeftName, iconRightName, title, onIconLeftPress, onIconRightPress, height, labelStyle, textAlignVertical='center' ,...rest }, ref) => {
 
         const calculateSizeWidth = () => {
             if(IconLeft && IconRight){
@@ -54,7 +55,7 @@ const Input = forwardRef<TextInput, Props>(
                     )}
                     <TextInput 
                         ref={ref} 
-                        style={[style.input, {width:calculateSizeWidth()}]} 
+                        style={[style.input, {width:calculateSizeWidth(), textAlignVertical:textAlignVertical}]} 
                         {...rest} 
                     />
                     {IconRight && (

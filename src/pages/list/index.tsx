@@ -10,15 +10,40 @@ import CustomModal from "../../components/CustomModal/CustomModal";
 import { TaskDatabase, useTaskDatabase } from "../../database/useTaskDatabase";
 import Button from "../../components/Button";
 import CustomDropdown from "../../components/CustomModal/CustomDropdown";
+import CalendarView from "@/src/components/Calendar/CalendarView";
+import TaskList from "@/src/components/Calendar/TaskList";
+import FlashcardApp from "@/src/components/Flashcard/Flashcard";
+import Horas from "@/src/components/Horas/Horas";
 
 export type UpTask = {
     title: string;
     date: string;
-    discription: string;  // Corrigido: discription<task className="discription"></task> para discription
+    discription: string;
     status: string;
     flag: string;
     type: string;
 };
+
+export type Task = {
+    text: string;
+    flag: string;
+    done: string;
+};
+
+export type TasksByDate = {
+    [date: string]: Task[];
+};
+
+//   const exampleTasksByDate: TasksByDate = {
+//     '2025-04-25': [
+//       { text: 'Estudar TypeScript', done: false },
+//       { text: 'Ir ao mercado', done: true },
+//     ],
+//     '2025-04-26': [
+//       { text: 'Fazer deploy do app', done: false },
+//       { text: 'Escrever resumo do capítulo 3', done: false },
+//     ],
+//   };
 
 function List() {
     const [selectedTask, setSelectedTask] = useState<TaskDatabase | null>(null);
@@ -37,22 +62,24 @@ function List() {
     const [filteredTasks, setFilteredTasks] = useState<TaskDatabase[]>([]);
     const taskDatabase = useTaskDatabase();
 
-  
+    const [selectedTab, setSelectedTab] = useState("Lista");
+
+
     const filterTasks = (tasks: TaskDatabase[], searchText: string, filterValue: string) => {
         return tasks.filter(task => {
-          // Filtro pelo texto da pesquisa (título da tarefa)
-          const matchesSearch = task.title.toLowerCase().includes(searchText.toLowerCase());
-      
-          // Filtro pelo valor do dropdown
-          let matchesFilter = true;
-          if (filterValue !== "ALL") {
-            matchesFilter = task.status === filterValue || task.flag === filterValue || task.type === filterValue;
-          }
-      
-          // Retorna true apenas se ambos os filtros forem atendidos
-          return matchesSearch && matchesFilter;
+            // Filtro pelo texto da pesquisa (título da tarefa)
+            const matchesSearch = task.title.toLowerCase().includes(searchText.toLowerCase());
+
+            // Filtro pelo valor do dropdown
+            let matchesFilter = true;
+            if (filterValue !== "ALL") {
+                matchesFilter = task.status === filterValue || task.flag === filterValue || task.type === filterValue;
+            }
+
+            // Retorna true apenas se ambos os filtros forem atendidos
+            return matchesSearch && matchesFilter;
         });
-      };
+    };
 
     async function remove(id: number) {
         try {
@@ -69,7 +96,7 @@ function List() {
         setUpTask({
             title: task.title,
             date: task.date,
-            discription: task.discription,  
+            discription: task.discription,
             status: task.status,
             flag: task.flag,
             type: task.type
@@ -88,30 +115,30 @@ function List() {
 
     async function list() {
         try {
-          const response = await taskDatabase.searchByTitle(search);
-          setTasks(response);
-          const filtered = filterTasks(response, search, filtro);
-          setFilteredTasks(filtered);
+            const response = await taskDatabase.searchByTitle(search);
+            setTasks(response);
+            const filtered = filterTasks(response, search, filtro);
+            setFilteredTasks(filtered);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      }
+    }
 
-      async function getAllTasks() {
+    async function getAllTasks() {
         try {
-          const response = await taskDatabase.getAll();
-          setTasks(response);
-          const filtered = filterTasks(response, search, filtro);
-          setFilteredTasks(filtered);
+            const response = await taskDatabase.getAll();
+            setTasks(response);
+            const filtered = filterTasks(response, search, filtro);
+            setFilteredTasks(filtered);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      }
+    }
 
     useEffect(() => {
         const filtered = filterTasks(tasks, search, filtro);
         setFilteredTasks(filtered);
-      }, [tasks, search, filtro]);
+    }, [tasks, search, filtro]);
 
     useEffect(() => {
         list();
@@ -119,24 +146,24 @@ function List() {
 
     async function handleSaveTask(updatedTask: UpTask) {
         if (selectedTask?.id) {
-          await taskDatabase.update({
-            id: Number(selectedTask.id),
-            ...updatedTask, 
-          });
+            await taskDatabase.update({
+                id: Number(selectedTask.id),
+                ...updatedTask,
+            });
         } else {
-          await taskDatabase.create(updatedTask); 
+            await taskDatabase.create(updatedTask);
         }
-      
-        await list(); 
-        setIsModalVisible(false); 
-      }
+
+        await list();
+        setIsModalVisible(false);
+    }
 
     const renderCard = (item: TaskDatabase) => {
 
         const getBallColor = (flag: string) => {
             if (flag === "URGENTISSIMO") {
                 return "#ee4a4a"; //vermelho
-            } else if(flag ==="URGENTE"){
+            } else if (flag === "URGENTE") {
                 return 'orange'
             } else if (flag === "ROTINA") {
                 return "#73c46a"; //verde
@@ -156,17 +183,17 @@ function List() {
                                 <Text style={style.typeCard}>{item.status}</Text>
                             </View>
                         </View>
-                        <View style={{flex:1, flexDirection:'row', gap:10, alignItems:"center"}}>
-                            <View style={{flexDirection: "column", alignItems: "center" , gap:5}}>
+                        <View style={{ flex: 1, flexDirection: 'row', gap: 10, alignItems: "center" }}>
+                            <View style={{ flexDirection: "column", alignItems: "center", gap: 5 }}>
                                 <Flag color={getBallColor(item.flag)} caption={item.flag} />
                                 <Text style={style.typeCard}>{item.type}</Text>
                             </View>
                             <TouchableOpacity onPress={() => remove(item.id)}>
-                                <View  style={{width:40,height:40,gap:10,borderColor:'#F1F1F1',borderWidth:2,borderRadius:10, backgroundColor:'#F8F8F8',marginRight:10,justifyContent:"center", alignItems:'center'}}>
+                                <View style={{ width: 40, height: 40, gap: 10, borderColor: '#F1F1F1', borderWidth: 2, borderRadius: 10, backgroundColor: '#F8F8F8', marginRight: 10, justifyContent: "center", alignItems: 'center' }}>
                                     <FontAwesome
                                         name='trash'
                                         size={30}
-                                        style={{color: themas.colors.primary}}
+                                        style={{ color: themas.colors.primary }}
                                     />
                                 </View>
                             </TouchableOpacity>
@@ -178,6 +205,35 @@ function List() {
             </View>
         );
     };
+
+    const navguia = ['Lista', 'Calendar', 'Flashcard', 'Horas'];
+    const navguia_acentuado = ['Lista', 'Calendar', 'Flashcard', 'Horas de EXT'];
+
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    function convertTasks(tasks: TaskDatabase[]): TasksByDate {
+        const tasksByDate: TasksByDate = {};
+
+        tasks.forEach((task) => {
+            // Converte "17/03/2025 - 08:59" em "2025-03-17"
+            const [datePart] = task.date.split(' - ');
+            const [day, month, year] = datePart.split('/');
+            const isoDate = `${year}-${month}-${day}`;
+
+            if (!tasksByDate[isoDate]) {
+                tasksByDate[isoDate] = [];
+            }
+
+            tasksByDate[isoDate].push({
+                text: task.title,
+                flag: task.flag,
+                done: task.status,
+            });
+        });
+
+        return tasksByDate;
+    }
+
 
     return (
         <View style={style.container}>
@@ -191,41 +247,72 @@ function List() {
                             onChangeText={setSearch}
                         />
                     </View>
-                    <View style={{flexDirection:'row', alignItems:"center", marginTop:5}}>
-                            {/* <Text style={{fontSize:20, color:'white', fontWeight:"bold"}}>Filtro: </Text>  */}
-                            <CustomDropdown
-                                options={["EM PROCESSO", "FINALIZADO", "URGENTISSIMO", 'URGENTE', 'PREFERENCIAL', 'ROTINA','ALL']}
-                                selectedValue={filtro}
-                                onValueChange={setFiltro}
-                                // onValueChange={(e) => filtroAluno(e, alunosFull)}
-                                width={154}
-                                height={40}
-                            />
+                    <View style={{ flexDirection: 'row', alignItems: "center", marginTop: 5 }}>
+                        {/* <Text style={{fontSize:20, color:'white', fontWeight:"bold"}}>Filtro: </Text>  */}
+                        <CustomDropdown
+                            options={["EM PROCESSO", "FINALIZADO", "URGENTISSIMO", 'URGENTE', 'PREFERENCIAL', 'ROTINA', 'ALL']}
+                            selectedValue={filtro}
+                            onValueChange={setFiltro}
+                            // onValueChange={(e) => filtroAluno(e, alunosFull)}
+                            width={154}
+                            height={40}
+                        />
                     </View>
                 </View>
             </View>
-            <View style={style.boxList}>
-                <FlatList
-                    data={filteredTasks}
-                    style={{ marginTop: 10, paddingHorizontal: 20 }}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => renderCard(item)}
-                />
+
+            <View style={{ flexDirection: "row", justifyContent: "space-around", gap: 10, borderWidth: 1, borderColor: '#D3D3D3', backgroundColor: '#D3D3D3', width: '100%' }}>
+                {navguia.map((item, index) => (
+                    <TouchableOpacity key={index} style={[style.tab, selectedTab === item && style.activeTab]} onPress={() => setSelectedTab(item)}>
+                        <Text style={[style.text, selectedTab === item && style.activeText]}>
+                            {navguia_acentuado[index]}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
+
+            <View style={{ marginBottom: 130, height: '75.5%' }}>
+                {selectedTab === 'Lista' ? (
+                    <View style={style.boxList}>
+                        <FlatList
+                            data={filteredTasks}
+                            style={{ marginTop: 10, paddingHorizontal: 10 }}
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={({ item }) => renderCard(item)}
+                        />
+                    </View>
+                ) : selectedTab === 'Calendar' ? (
+                    <View style={{ width: '95%' }}>
+                        <CalendarView selectedDate={selectedDate} onSelectDate={setSelectedDate} tasks={convertTasks(tasks)} />
+                        <TaskList
+                            date={selectedDate}
+                            tasks={convertTasks(tasks)[selectedDate.toISOString().split('T')[0]] || []}
+                        // onToggleDone={(index) => toggleTaskDone(selectedDate, index)}
+                        />
+
+                    </View>
+                ) : selectedTab === 'Flashcard' ? (
+                    <View style={{ height: '104%' }}>
+                        <FlashcardApp />
+                    </View>
+                ) : (
+                    <Horas />
+                )}
             </View>
 
             <TouchableOpacity
                 style={style.addButton}
                 onPress={() => {
-                setSelectedTask(null); // Define selectedTask como null para criar uma nova tarefa
-                setUpTask({
-                    title: "",
-                    date: "",
-                    discription: "",
-                    status: "",
-                    flag: "",
-                    type: "",
-                });
-                setIsModalVisible(true); // Abre o modal
+                    setSelectedTask(null); // Define selectedTask como null para criar uma nova tarefa
+                    setUpTask({
+                        title: "",
+                        date: "",
+                        discription: "",
+                        status: "",
+                        flag: "",
+                        type: "",
+                    });
+                    setIsModalVisible(true); // Abre o modal
                 }}
             >
                 <Text style={style.addButtonText}>+</Text>

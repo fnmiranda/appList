@@ -42,8 +42,8 @@ const CustomModal: React.FC<CustomModalProps> = ({ isVisible, onClose, onSave, t
     setTitle(task?.title || "")
     setDate(task?.date || "");
     setDiscription(task?.discription || "");
-    setStatus(task?.status || "");
-    setFlag(task?.flag || "");
+    setStatus(task?.status || "EM PROCESSO");
+    setFlag(task?.flag || "ROTINA");
     setType(task?.type || "");
 
 
@@ -151,7 +151,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ isVisible, onClose, onSave, t
             <View style={{flexDirection:"row"}}>
               <View style={{width:'85%'}}>
                 <Input
-                  title="Prazo:"
+                  title="Data:"
                   labelStyle={styles.label}
                   value={date}
                   onChangeText={setDate}
@@ -176,6 +176,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ isVisible, onClose, onSave, t
                 labelStyle={styles.label}
                 value={discription}
                 onChangeText={setDiscription}
+                textAlignVertical="top"
               />
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" , marginTop:10}}>

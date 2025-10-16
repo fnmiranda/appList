@@ -18,7 +18,7 @@ export const style = StyleSheet.create({
         height:'100%',
         width:'100%',
         borderRadius:20,
-        textAlignVertical:'top',        
+        // textAlignVertical:'top',        
     },
     titleInput:{
         marginLeft:5,

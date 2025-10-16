@@ -7,6 +7,7 @@ import { useAuth } from "../../context/authContext";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../routes/index.routes";
 
+import { Entypo } from "@expo/vector-icons"
 interface Usuario {
     id: number;
     nome: string;
@@ -19,7 +20,6 @@ function User() {
     const navigation = useNavigation<ProfileScreenNavigationProp>();
     const { user, logout } = useAuth();
     const { updateUser, getUserByEmail } = useUserDatabase();
-    // const navigation = useNavigation(); 
 
     // Estado para armazenar as informações do usuário
     const [usuario, setUsuario] = useState<Usuario>({
@@ -67,7 +67,7 @@ function User() {
             setLoading(true);
 
             // Validação dos campos
-            
+
             // Atualiza o usuário no banco de dados
             if (user) {
                 if (!usuario.nome || !usuario.email) {

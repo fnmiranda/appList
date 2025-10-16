@@ -41,7 +41,7 @@ export default function Pelotao() {
     const [selectedTab, setSelectedTab] = useState("Chamada");
 
     const alunoDatabase = useAlunoDatabase();
- 
+
     const handleOpenModal = (aluno: Aluno) => {
         setSelectAluno(aluno);
         setUpAluno({
@@ -61,31 +61,37 @@ export default function Pelotao() {
         setIsModalVisible(true);
     };
 
-    const filtroAluno =  (e: string, alunos: Aluno[]) => {
+    const filtroAluno = (e: string, alunos: Aluno[]) => {
         setFiltro(e)
-        
-        if (e ==='ALPHA'){
-            setAlunosFiltro(alunos.filter((aluno) => aluno.turma ==='A'))
-        }else
-        if (e ==='BRAVO'){
-            setAlunosFiltro(alunos.filter((aluno) => aluno.turma ==='B'))
-        }else
-        if (e ==='CHARLIE'){
-              setAlunosFiltro(alunos.filter((aluno) => aluno.turma ==='C'))
-        }else
-        
-        if (e ==='1'){
-              setAlunosFiltro(alunos.filter((aluno) => aluno.pelotao ==='1'))
-        }else
-        
-        if (e ==='2'){
-          setAlunosFiltro(alunos.filter((aluno) => aluno.pelotao ==='2'))
-        }else{
-          setAlunosFiltro(alunos)
-        }
+
+        if (e === 'ALPHA') {
+            setAlunosFiltro(alunos.filter((aluno) => aluno.turma === 'A'))
+        } else
+            if (e === 'BRAVO') {
+                setAlunosFiltro(alunos.filter((aluno) => aluno.turma === 'B'))
+            } else
+                if (e === 'CHARLIE') {
+                    setAlunosFiltro(alunos.filter((aluno) => aluno.turma === 'C'))
+                } else
+
+                    if (e === '1') {
+                        setAlunosFiltro(alunos.filter((aluno) => aluno.pelotao === '1'))
+                    } else
+
+                        if (e === '2') {
+                            setAlunosFiltro(alunos.filter((aluno) => aluno.pelotao === '2'))
+                        } else
+                            if (e === 'ATIVAS') {
+                                setAlunosFiltro(alunos.filter((aluno) => aluno.pelotao !== 'RESERVA'))
+                            } else
+                                if (e === 'RESERVAS') {
+                                    setAlunosFiltro(alunos.filter((aluno) => aluno.pelotao === 'RESERVA'))
+                                } else if (e === 'ALL') {
+                                    setAlunosFiltro(alunos)
+                                }
         // console.log(alunosFiltro)
-        
-      }
+
+    }
 
     async function remove(id: number) {
         try {
@@ -128,7 +134,7 @@ export default function Pelotao() {
     }
 
     useEffect(() => {
-        filtroAluno(filtro, alunosFull); 
+        filtroAluno(filtro, alunosFull);
     }, [selectedTab, alunosFull]);
 
     useEffect(() => {
@@ -139,8 +145,10 @@ export default function Pelotao() {
         getAllAlunos();
     }, [filtro, selectedTab, alunos]);
 
-    const navguia = ['Alunos', 'Voluntarios', 'Baixados', 'Servico', 'Chamada'];
-    const navguia_acentuado = ['Alunos', 'Voluntários', 'Baixados', 'Serviço', 'Chamada'];
+    const navguia = ['Alunos', 'Voluntarios', 'Servico', 'Chamada'];
+    //const navguia = ['Alunos', 'Voluntarios', 'Baixados', 'Servico', 'Chamada'];
+    const navguia_acentuado = ['Alunos', 'Voluntários', 'Serviço', 'Chamada'];
+    //const navguia_acentuado = ['Alunos', 'Voluntários', 'Baixados', 'Serviço', 'Chamada'];
 
     return (
         <View style={style.container}>
@@ -154,10 +162,10 @@ export default function Pelotao() {
                             onChangeText={setSearch}
                         />
                     </View>
-                    <View style={{flexDirection:'row', alignItems:"center", marginTop:5}}>
+                    <View style={{ flexDirection: 'row', alignItems: "center", marginTop: 5 }}>
                         {/* <Text style={{fontSize:20, color:'white', fontWeight:"bold"}}>Filtro: </Text>  */}
                         <CustomDropdown
-                            options={["ALPHA", "BRAVO", "CHARLIE", '1', '2', 'ALL']}
+                            options={["ALPHA", "BRAVO", "CHARLIE", '1', '2', 'ATIVAS', 'RESERVAS', 'ALL']}
                             selectedValue={filtro}
                             onValueChange={(e) => filtroAluno(e, alunosFull)}
                             width={120}
@@ -165,10 +173,10 @@ export default function Pelotao() {
                         />
                     </View>
                 </View>
-                
+
             </View>
 
-            <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 10, borderWidth: 1, borderColor: '#D3D3D3', backgroundColor: '#D3D3D3' }}>
+            <View style={{ width: "100%", flexDirection: "row", justifyContent: "center", gap: 25, borderWidth: 1, borderColor: '#D3D3D3', backgroundColor: '#D3D3D3' }}>
                 {navguia.map((item, index) => (
                     <TouchableOpacity key={index} style={[style.tab, selectedTab === item && style.activeTab]} onPress={() => setSelectedTab(item)}>
                         <Text style={[style.text, selectedTab === item && style.activeText]}>
@@ -178,7 +186,7 @@ export default function Pelotao() {
                 ))}
             </View>
 
-            <View style={{ marginBottom: 130 }}>
+            <View style={{ marginBottom: 275 }}>
                 {selectedTab === 'Alunos' ? (
                     <ChamadaAlunos alunos={alunos} onOpen={handleOpenModal} remove={remove} />
                 ) : selectedTab === 'Voluntarios' ? (

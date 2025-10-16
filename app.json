@@ -33,7 +33,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-sqlite"
     ],
     "experiments": {
       "typedRoutes": true
@@ -46,6 +47,12 @@
         "projectId": "14c18e9d-4eb4-4101-9e9c-fafb369bf4f1"
       }
     },
-    "owner": "franciscomiranda"
+    "owner": "franciscomiranda",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/14c18e9d-4eb4-4101-9e9c-fafb369bf4f1"
+    }
   }
 }

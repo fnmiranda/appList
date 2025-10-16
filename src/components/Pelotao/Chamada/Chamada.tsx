@@ -12,34 +12,7 @@ interface CustomProps {
 const ChamadaScreen: React.FC<CustomProps> = ({ alunos }) => {
   const [alunosPresentes, setAlunosPresentes] = useState<Aluno[]>([]);
   const [alunosFaltantes, setAlunosFaltantes] = useState<Aluno[]>(alunos);
-    //  const [filtro, setFiltro] = useState<string>('ALPHA')
-  
-      //  const filtroAluno = (e: string) =>{
-      //     setFiltro(e)
-      //     if (e ==='ALPHA'){
-      //       setAlunosFaltantes(alunos.filter((aluno) => aluno.turma ==='A'))
-      //     }else
-      //     if (e ==='BRAVO'){
-      //       setAlunosFaltantes(alunos.filter((aluno) => aluno.turma ==='B'))
-      //     }else
-      //     if (e ==='CHARLIE'){
-      //       setAlunosFaltantes(alunos.filter((aluno) => aluno.turma ==='C'))
-      //     }else
-          
-      //     if (e ==='1'){
-      //       setAlunosFaltantes(alunos.filter((aluno) => aluno.pelotao ==='1'))
-      //     }else
-          
-      //     if (e ==='2'){
-      //       setAlunosFaltantes(alunos.filter((aluno) => aluno.pelotao ==='2'))
-      //     }else{
-      //       setAlunosFaltantes(alunos)
-      //     }
-      //     setAlunosPresentes([])
-      //   }
-  
 
- 
 
   // Função para marcar o aluno como presente
   const marcarComoPresente = (aluno: Aluno) => {
@@ -67,34 +40,25 @@ const ChamadaScreen: React.FC<CustomProps> = ({ alunos }) => {
       <Text style={styles.headerText}>
         Presentes: {alunosPresentes.length} | Faltantes: {alunosFaltantes.length}
       </Text>
-      {/* <View style={{flexDirection:'row', alignItems:"center"}}>
-            <Text style={{fontSize:20, color:'white', fontWeight:"bold"}}>Filtro: </Text> 
-            <CustomDropdown
-              options={["ALPHA", "BRAVO", "CHARLIE", '1', '2']}
-              selectedValue={filtro}
-              onValueChange={(e) => filtroAluno(e)}
-              height={38}
-            />
-        </View> */}
     </View>
   );
 
   // Renderiza um item da lista de alunos
   const renderItem = (item: Aluno, isPresente: boolean) => (
     <View key={item.id} style={[styles.item, isPresente && styles.itemPresente]}>
-      <View style={{flexDirection:'column'}}>
+      <View style={{ flexDirection: 'column' }}>
         <View style={styles.itemContent}>
           <Text style={styles.itemName}>{item.nome}</Text>
           <Text style={styles.itemDetails}> - {item.numero}</Text>
         </View>
-        {item.situacao === 'BAIXADO' ?(
-          <Text style={[styles.situation,{backgroundColor: '#2a5db2'}]}>{item.situacao}</Text>
-        ):item.situacao === 'SERVICO' ?(
-          <Text style={[styles.situation,{backgroundColor: '#F44E3F'}]}>{item.situacao}</Text>
-        
-        ):(
+        {item.situacao === 'BAIXADO' ? (
+          <Text style={[styles.situation, { backgroundColor: '#2a5db2' }]}>{item.situacao}</Text>
+        ) : item.situacao === 'SERVICO' ? (
+          <Text style={[styles.situation, { backgroundColor: '#F44E3F' }]}>{item.situacao}</Text>
+
+        ) : (
           <></>
-          
+
         )}
 
       </View>
@@ -111,34 +75,34 @@ const ChamadaScreen: React.FC<CustomProps> = ({ alunos }) => {
     </View>
   );
 
-  useEffect(()=>{
+  useEffect(() => {
     setAlunosFaltantes(alunos);
     setAlunosPresentes([])
-  },[alunos])
+  }, [alunos])
 
   return (
-    <View style={{marginBottom:50, marginHorizontal:2}}>
-      <View style={{padding:5}}>
+    <View style={{ marginBottom: 40, marginHorizontal: 2 }}>
+      <View style={{ padding: 5 }}>
         {renderHeader()}
       </View>
-        <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         {/* Cabeçalho com as informações */}
-        
+
 
         <Text style={styles.title}>Lista de Alunos Faltantes</Text>
         {alunosFaltantes.length > 0 ? (
-            alunosFaltantes.map((item) => renderItem(item, false))
+          alunosFaltantes.map((item) => renderItem(item, false))
         ) : (
-            <Text style={styles.emptyText}>Todos os alunos estão presentes.</Text>
+          <Text style={styles.emptyText}>Todos os alunos estão presentes.</Text>
         )}
 
         <Text style={styles.title}>Lista de Alunos Presentes</Text>
         {alunosPresentes.length > 0 ? (
-            alunosPresentes.map((item) => renderItem(item, true))
+          alunosPresentes.map((item) => renderItem(item, true))
         ) : (
-            <Text style={styles.emptyText}>Nenhum aluno presente ainda.</Text>
+          <Text style={styles.emptyText}>Nenhum aluno presente ainda.</Text>
         )}
-        </ScrollView>
+      </ScrollView>
     </View>
   );
 };
@@ -187,7 +151,7 @@ const styles = StyleSheet.create({
   },
   itemContent: {
     flex: 1,
-    flexDirection:'row'
+    flexDirection: 'row'
   },
   itemName: {
     fontSize: 16,
@@ -223,16 +187,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: "100%", // Ocupa toda a largura
   },
-  situation:{
-    padding:3,
-    textAlign:'center',
-    borderRadius:10,
+  situation: {
+    padding: 3,
+    textAlign: 'center',
+    borderRadius: 10,
     // borderColor:'#2a5db2', 
-    borderWidth:1,
-    fontSize:14, 
-    fontWeight:'bold', 
-    color:'white', 
-    width:80
+    borderWidth: 1,
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
+    width: 80
   },
 });
 

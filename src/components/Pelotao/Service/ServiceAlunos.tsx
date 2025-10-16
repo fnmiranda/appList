@@ -8,7 +8,7 @@ interface CustomProps {
 }
 
 const ServiceScreen: React.FC<CustomProps> = ({ alunos }) => {
-  const alunosBaixados = alunos.filter((aluno) => aluno.situacao === "SERVICO" );
+  const alunosBaixados = alunos.filter((aluno) => aluno.situacao === "SERVICO");
 
   return (
     <FlatList
@@ -29,7 +29,8 @@ const ServiceScreen: React.FC<CustomProps> = ({ alunos }) => {
       )}
       ListEmptyComponent={() => (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>Nenhum aluno de Serviço encontrado.</Text>
+          {/*<Text style={styles.emptyText}>Nenhum aluno de Serviço encontrado.</Text>*/}
+          <Text style={styles.emptyText}>EM DESENVOLVIMENTO.</Text>
         </View>
       )}
     />
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 10,
     backgroundColor: "#f5f5f5",
-    width:400
+    width: 400
   },
   header: {
     width: "100%",
