@@ -50,5 +50,5 @@ Sistema mobile desenvolvido em **TypeScript** com **Expo** para controle e geren
 
 1. **Clone o repositório**
    ```bash
-   git clone https://github.com/seu-usuario/student-control-system.git
+   git clone [https://github.com/fnmiranda/appList.git]
    cd student-control-system
